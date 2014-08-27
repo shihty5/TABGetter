@@ -16,12 +16,17 @@ public class Spider {
 		String result = "";
 		// 定义一个缓冲字符输入流
 		BufferedReader in = null;
-
+		URLConnection connection = null;
+		
 		try {
 			// 将string转成url对象
 			URL realUrl = new URL(url);
 			// 初始化一个链接到那个url的连接
-			URLConnection connection = realUrl.openConnection(proxy);
+			if(proxy != null){
+			 connection= realUrl.openConnection(proxy);
+			}else{
+				connection= realUrl.openConnection();
+			}
 			// 开始实际的连接
 			connection.connect();
 			// 初始化 BufferedReader输入流来读取URL的响应
